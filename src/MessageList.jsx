@@ -13,8 +13,8 @@ class MessageList extends Component {
   render () {
     // Iterate through the list of Messages and populate the MessageList window
     return (<div>
-      {this.state.messageArray.map((element, index) => {
-        return <Message key={index} username= {element.username} content= {element.content}></Message>
+      {this.state.messageArray.map((element) => {
+        return <Message key={element.id} username= {element.username} content= {element.content}></Message>
       })}
     </div>);
   }
