@@ -1,17 +1,27 @@
 import React, {Component} from 'react';
-
+const rndCharGen = require('./utils');
 class Chatbar extends Component {
   constructor (props) {
     super (props)
     this.state = {currentUser: 'Annonymous'}
   }
   
+  makeMessageObject = (edata) => {
+    const messageObj = {
+      username: this.state.currentUser,
+      content: edata.target.value.trim(),
+      id: rndCharGen.generateRandomId()
+    }
+    return messageObj;
+  }
+
   handleChatMessageChange = (e) => {
     // Handles when user types presses enter. 
     // Create a chat message object and sent it up to the parent
     if (e.key === 'Enter') {
-      console.log()
-      this.props.funcUpdateChatMessage();
+      const obj = this.makeMessageObject(e);
+      console.log(obj);
+      this.props.funcUpdateChatMessage(obj);
     }
   }
   updateSender = (e) => {
