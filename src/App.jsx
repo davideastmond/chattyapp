@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Chatbar from './Chatbar.jsx';
+import MessageList from  './Messagelist.jsx';
 
 class App extends Component {
   render() {
@@ -7,9 +8,7 @@ class App extends Component {
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a> 
         </nav>
-        <div className="messages">
-          
-        </div>
+          <MessageList />
         <Chatbar/>
       </div>
     );
