@@ -18,7 +18,7 @@ class Chatbar extends Component {
   handleChatMessageChange = (e) => {
     // Handles when user types presses enter. 
     // Create a chat message object and sent it up to the parent
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && e.target.value.trim() !== "") {
       const obj = this.makeMessageObject(e);
       this.props.funcUpdateChatMessage(obj);
       e.target.value = "";
