@@ -25,17 +25,18 @@ class App extends Component {
                     currentUser: 'Bob'}
   }
 
+  updateChatMessage = () => {
+    console.log("App update chat message");
+  }
   componentDidMount () {
     setTimeout(() => {
       console.log("Simulating incoming message");
       // Add a new message to the list of messages in the data store
       const newMessage = {id: "3", username: "Michelle", content: "Hello there!"};
       const messages = this.state.messagelist.concat(newMessage);
-     console.log("line 24", messages);
       // Update the state of the app component.
       // Calling setState will trigger a call to render() in App and all child components.
       this.setState({ messagelist: messages });
-      console.log(this);
     }, 3000);
   }
 
@@ -45,7 +46,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a> 
         </nav>
           <MessageList messagelist= {this.state.messagelist}/>
-        <Chatbar currentUser={this.state.currentUser}/>
+        <Chatbar currentUser={this.state.currentUser} funcUpdateChatMessage={this.updateChatMessage}/>
       </div>
     );
   }
