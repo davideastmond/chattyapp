@@ -20,8 +20,8 @@ class Chatbar extends Component {
     // Create a chat message object and sent it up to the parent
     if (e.key === 'Enter') {
       const obj = this.makeMessageObject(e);
-      console.log(obj);
       this.props.funcUpdateChatMessage(obj);
+      e.target.value = "";
     }
   }
   updateSender = (e) => {

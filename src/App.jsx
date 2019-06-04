@@ -22,11 +22,15 @@ class App extends Component {
   constructor () {
     super ()
     this.state = { messagelist: msgDB.messages,
-                    currentUser: 'Bob'}
+                    currentUser: 'Annonymous'}
   }
 
-  updateChatMessage = () => {
-    console.log("App update chat message");
+  updateChatMessage = (messageData) => {
+    // Process the user input triggered by the child event and sets a new state
+    console.log("App update chat message ", messageData);
+    const messages = this.state.messagelist.concat(messageData)
+    this.setState({messagelist: messages});
+    
   }
   componentDidMount () {
     setTimeout(() => {
