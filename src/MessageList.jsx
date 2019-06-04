@@ -8,12 +8,14 @@ class MessageList extends Component {
     super (props)
     const listOfMessages = this.props.messagelist;
     this.state = { messageArray: listOfMessages };
-    
   }
 
   render () {
+    // Iterate through the list of Messages and populate the MessageList window
     return (<div>
-      <p> Message </p>
+      {this.state.messageArray.map((element, index) => {
+        return <Message key={index} username= {element.username} content= {element.content}></Message>
+      })}
     </div>);
   }
 }

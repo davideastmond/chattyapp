@@ -8,8 +8,8 @@ class Message extends Component {
 
     this.state = {
       type: "incomingMessage",
-      username: 'Default User',
-      messagebody: 'Sample Message'
+      username: this.props.username,
+      messagebody: this.props.content
     }
   }
 
