@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-
+import Chatbar from './ChatBar'
 class App extends Component {
   render() {
     return (
-      <h1>Hello React :)</h1>
+      <Chatbar className="chatbar" />
     );
   }
 }
