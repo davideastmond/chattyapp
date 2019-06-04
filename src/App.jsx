@@ -3,6 +3,9 @@ import Chatbar from './Chatbar.jsx';
 import MessageList from  './Messagelist.jsx';
 
 class App extends Component {
+  constructor () {
+    
+  }
   render() {
     return (<div>
         <nav className="navbar">
