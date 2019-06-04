@@ -4,7 +4,9 @@ import MessageList from  './Messagelist.jsx';
 
 class App extends Component {
   constructor () {
-    
+    super ()
+    this.state = { messagelist: [],
+                    currentUser: 'Annonymous'}
   }
   render() {
     return (<div>
