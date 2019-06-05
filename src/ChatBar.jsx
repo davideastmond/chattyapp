@@ -9,8 +9,7 @@ class Chatbar extends Component {
   makeMessageObject = (edata) => {
     const messageObj = {
       username: this.state.currentUser,
-      content: edata.target.value.trim(),
-      id: rndCharGen.generateRandomId()
+      content: edata.target.value.trim()
     }
     return messageObj;
   }
