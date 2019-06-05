@@ -32,12 +32,21 @@ class App extends Component {
     // Here is where we want to send the data to the server
     const formattedData = this.createClientMessage("user_message", messageData);
     this.socket.send(formattedData);
+    
     /*
-    
-    Then we get this data back from server
     const messages = this.state.messagelist.concat(messageData)
-    this.setState({messagelist: messages}); */
+    this.setState({ messagelist: messages}); */
     
+  }
+  getMessageFromServer = (messageData) => {
+    // Get the message data from the server
+    
+    const parsedData = JSON.parse(messageData);
+    console.log("Parsed Data", parsedData);
+    
+    const messages = this.state.messagelist.concat(parsedData.msgData);
+    this.setState({messagelist: messages});
+   
   }
   componentDidMount () {
     
@@ -45,6 +54,12 @@ class App extends Component {
 
     this.socket.onopen = () => {
       console.log("Connected to server.");
+    }
+    
+    this.socket.onmessage = e => {
+      // Display the message on the client
+      
+      this.getMessageFromServer(e.data)
     }
   }
 
