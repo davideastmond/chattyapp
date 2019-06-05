@@ -42,8 +42,6 @@ class App extends Component {
     // Get the message data from the server
     
     const parsedData = JSON.parse(messageData);
-    console.log("Parsed Data", parsedData);
-    
     const messages = this.state.messagelist.concat(parsedData.msgData);
     this.setState({messagelist: messages});
    

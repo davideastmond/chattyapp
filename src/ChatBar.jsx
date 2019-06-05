@@ -23,14 +23,17 @@ class Chatbar extends Component {
       e.target.value = "";
     }
   }
+  // EVENT HANDLER for when user changes their name
   updateSender = (e) => {
     // Update the state currentUser state property when a user types a name into the username box
-    this.setState({currentUser: e.target.value.trim()})
+    if (e.key ==='Enter') {
+      // activate a function that propogates the username
+    }
     
   }
   render () {
     return (<footer className="chatbar">
-      <input className="chatbar-username" onChange={this.updateSender} placeholder={"Your Name (Optional)"} defaultValue= {this.props.currentUser} />
+      <input className="chatbar-username" onKeyPress={this.updateSender} placeholder={"Your Name (Optional)"} defaultValue= {this.props.currentUser} />
       <input className="chatbar-message" onKeyPress={this.handleChatMessageChange} placeholder="Type a message and hit ENTER" />
     </footer>);
   }
