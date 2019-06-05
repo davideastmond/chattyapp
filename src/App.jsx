@@ -2,22 +2,6 @@ import React, {Component} from 'react';
 import Chatbar from './Chatbar.jsx';
 import MessageList from  './Messagelist.jsx';
 
-const msgDB = {
-  currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
-  messages: [
-    {
-      username: "Bob",
-      content: "Has anyone seen my marbles?",
-      id: 'RB5'
-    },
-    {
-      username: "Anonymous",
-      content: "No, I think you lost them. You lost your marbles Bob. You lost them for good.",
-      id: 'AB1'
-    }
-  ]
-}
-
 class App extends Component {
   constructor () {
     super ()
@@ -43,11 +27,12 @@ class App extends Component {
     // Get the message data from the server
     
     const parsedData = JSON.parse(messageData);
-
+    
     // Determine the message type
-    const messages = this.state.messagelist.concat(parsedData.msgData);
+    const messages = this.state.messagelist.concat(parsedData);
+    console.log("Message Data Line 33", parsedData.msgData);
     this.setState({messagelist: messages});
-   
+    console.log("Current message state", this.state.messagelist);
   }
   componentDidMount () {
     

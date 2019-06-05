@@ -7,8 +7,11 @@ class MessageList extends Component {
     // Iterate through the list of Messages and populate the MessageList window
     return (<div>
       {this.props.messagelist.map((element) => {
-        return <Message key={element.id} username= {element.username} content= {element.content}></Message>
-      })}
+        if (element.type === "user_message") {
+          return <Message type={element.type} key={element.msgData.id} username= {element.msgData.username} 
+          content= {element.msgData.content}></Message>
+        }
+        })}
     </div>);
   }
 }
