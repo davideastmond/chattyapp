@@ -27,7 +27,28 @@ class Chatbar extends Component {
   updateSender = (e) => {
     // Update the state currentUser state property when a user types a name into the username box
     if (e.key ==='Enter') {
-      // activate a function that propogates the username
+      // activate a function that propogates the username up to the app parent
+      let changedUserName = e.target.value.trim();
+
+      if (changedUserName === this.state.currentUser) {
+        // The user hasn't changed their name - just pressed enter, so abort the function
+        return;
+      }
+
+      if (changedUserName === "") {
+        // If username is a null string, make it annonymous
+        changedUserName = "Annonymous"
+        e.target.value = changedUserName;
+      }
+      const userNameChangeDataObj = {
+        oldName: this.state.currentUser,
+        newName: changedUserName
+      }
+
+      this.setState({currentUser: changedUserName});
+      // Call the function in props
+      this.props.funcUpdateUsername(userNameChangeDataObj)
+      
     }
     
   }

@@ -24,24 +24,27 @@ class App extends Component {
     this.state = { messagelist: [],
                     currentUser: 'Annonymous'}
   }
-
+  updateCurrentUserName = (data) => {
+    // This function to be passed down in props to the username input text field
+    // data should be an object with {oldName, newName}
+    console.log(data.oldName, "changed their name to", data.newName)
+    
+    const formattedData = this.createClientMessage("client_name_change_notification", data);
+    this.socket.send(formattedData);
+  }
   updateChatMessage = (messageData) => {
     // Process the user input triggered by the child event and send the data to the server
-    console.log("App update chat message ", messageData);
-
     // Here is where we want to send the data to the server
     const formattedData = this.createClientMessage("user_message", messageData);
     this.socket.send(formattedData);
-    
-    /*
-    const messages = this.state.messagelist.concat(messageData)
-    this.setState({ messagelist: messages}); */
-    
   }
+
   getMessageFromServer = (messageData) => {
     // Get the message data from the server
     
     const parsedData = JSON.parse(messageData);
+
+    // Determine the message type
     const messages = this.state.messagelist.concat(parsedData.msgData);
     this.setState({messagelist: messages});
    
@@ -67,7 +70,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a> 
         </nav>
           <MessageList messagelist= {this.state.messagelist}/>
-        <Chatbar currentUser={this.state.currentUser} funcUpdateChatMessage={this.updateChatMessage}/>
+        <Chatbar currentUser={this.state.currentUser} funcUpdateChatMessage={this.updateChatMessage} funcUpdateUsername={this.updateCurrentUserName}/>
       </div>
     );
   }
