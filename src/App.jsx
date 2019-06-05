@@ -21,7 +21,7 @@ const msgDB = {
 class App extends Component {
   constructor () {
     super ()
-    this.state = { messagelist: msgDB.messages,
+    this.state = { messagelist: [],
                     currentUser: 'Annonymous'}
   }
 
