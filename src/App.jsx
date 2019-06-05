@@ -21,15 +21,22 @@ const msgDB = {
 class App extends Component {
   constructor () {
     super ()
-    this.state = { messagelist: msgDB.messages,
+    this.state = { messagelist: [],
                     currentUser: 'Annonymous'}
   }
 
   updateChatMessage = (messageData) => {
-    // Process the user input triggered by the child event and sets a new state
+    // Process the user input triggered by the child event and send the data to the server
     console.log("App update chat message ", messageData);
+
+    // Here is where we want to send the data to the server
+    const formattedData = this.createClientMessage("user_message", messageData);
+    this.socket.send(formattedData);
+    /*
+    
+    Then we get this data back from server
     const messages = this.state.messagelist.concat(messageData)
-    this.setState({messagelist: messages});
+    this.setState({messagelist: messages}); */
     
   }
   componentDidMount () {
@@ -50,6 +57,16 @@ class App extends Component {
         <Chatbar currentUser={this.state.currentUser} funcUpdateChatMessage={this.updateChatMessage}/>
       </div>
     );
+  }
+
+  createClientMessage(type, msgData) {
+    // Creates and serializes message data to send to the server 
+    const objToReturn = {
+      type,
+      msgData
+    }
+
+    return JSON.stringify(objToReturn);
   }
 }
 export default App;
