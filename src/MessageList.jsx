@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Message from './Message.jsx';
+import Notification from './notification.jsx'
 
 // The list container for messages.
 class MessageList extends Component {
