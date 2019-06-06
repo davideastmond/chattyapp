@@ -12,9 +12,10 @@ class MessageList extends Component {
           // Regular user message - render a message object
           return <Message type={element.type} key={element.msgData.id} username= {element.msgData.username} 
           content= {element.msgData.content}></Message>
-        } else if (element.type === "system_notification") {
+        } else if (element.type === "system_notification_name_change") {
           // Special system notification - render a notification-type
-          
+          const sysMessage = `${element.msgData.oldName} changed their name to ${element.msgData.newName}`
+          return <Notification key={element.msgData.id} systemMessage={sysMessage} />
         }
         })}
     </div>);

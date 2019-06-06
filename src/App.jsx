@@ -27,12 +27,14 @@ class App extends Component {
     /* Get the message data from the server, parse it and
      Determine the message type and determine how to display it */
     const parsedData = JSON.parse(messageData);
-    
+
     if (parsedData.type === "user_message") {
       const messages = this.state.messagelist.concat(parsedData);
       this.setState({messagelist: messages});
-    } else if (parsedData.type === "system_notification") {
-
+    } else if (parsedData.type === "system_notification_name_change") {
+      console.log("LINE 35 SYSTEM NOTIFICATION ", parsedData )
+      const messages = this.state.messagelist.concat(parsedData);
+      this.setState({messagelist: messages});
     }
   }
 
