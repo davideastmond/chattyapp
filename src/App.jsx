@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Chatbar from './Chatbar.jsx';
 import MessageList from  './Messagelist.jsx';
+import ChatCounter from './chatCounter.jsx';
 
 class App extends Component {
   constructor () {
@@ -55,6 +56,7 @@ class App extends Component {
     return (<div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a> 
+          <ChatCounter />
         </nav>
           <MessageList messagelist= {this.state.messagelist}/>
         <Chatbar currentUser={this.state.currentUser} funcUpdateChatMessage={this.updateChatMessage} funcUpdateUsername={this.updateCurrentUserName}/>
