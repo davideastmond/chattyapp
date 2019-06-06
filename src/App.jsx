@@ -24,18 +24,19 @@ class App extends Component {
   }
 
   getMessageFromServer = (messageData) => {
-    // Get the message data from the server
-    
+    /* Get the message data from the server, parse it and
+     Determine the message type and determine how to display it */
     const parsedData = JSON.parse(messageData);
     
-    // Determine the message type
-    const messages = this.state.messagelist.concat(parsedData);
-    console.log("Message Data Line 33", parsedData.msgData);
-    this.setState({messagelist: messages});
-    console.log("Current message state", this.state.messagelist);
+    if (parsedData.type === "user_message") {
+      const messages = this.state.messagelist.concat(parsedData);
+      this.setState({messagelist: messages});
+    } else if (parsedData.type === "system_notification") {
+
+    }
   }
+
   componentDidMount () {
-    
     this.socket = new WebSocket('ws://0.0.0.0:3001/');
 
     this.socket.onopen = () => {
@@ -44,7 +45,6 @@ class App extends Component {
     
     this.socket.onmessage = e => {
       // Display the message on the client
-      
       this.getMessageFromServer(e.data)
     }
   }
