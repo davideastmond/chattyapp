@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 class ChatCounter extends Component {
   render() {
     return <div>
-        <p className="counter">Users Online</p>
+        <p className="counter">{this.props.userCount} user(s) online.</p>
       </div>
     }
 }

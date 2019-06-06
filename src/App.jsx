@@ -7,13 +7,12 @@ class App extends Component {
   constructor () {
     super ()
     this.state = { messagelist: [],
-                    currentUser: 'Annonymous'}
+                    currentUser: 'Annonymous',
+                    userCount: 0}
   }
   updateCurrentUserName = (data) => {
     // This function to be passed down in props to the username input text field
     // data should be an object with {oldName, newName}
-    console.log(data.oldName, "changed their name to", data.newName)
-    
     const formattedData = this.createClientMessage("client_name_change_notification", data);
     this.socket.send(formattedData);
   }
@@ -24,18 +23,26 @@ class App extends Component {
     this.socket.send(formattedData);
   }
 
+  updateUserCount = (countData) => {
+    /* This function is going to be called when the server sends
+    the client an updated count of the users online */
+    this.setState({userCount: countData });
+  }
   getMessageFromServer = (messageData) => {
     /* Get the message data from the server, parse it and
-     Determine the message type and determine how to display it */
+     Determine the message type and determine how to display it 
+     It can be a user message or a system notification */
     const parsedData = JSON.parse(messageData);
 
     if (parsedData.type === "user_message") {
       const messages = this.state.messagelist.concat(parsedData);
       this.setState({messagelist: messages});
     } else if (parsedData.type === "system_notification_name_change") {
-      console.log("LINE 35 SYSTEM NOTIFICATION ", parsedData )
       const messages = this.state.messagelist.concat(parsedData);
       this.setState({messagelist: messages});
+    } else if (parsedData.type === "system_notification_user_count") {
+      console.log("Received a user count system message", parsedData);
+      this.updateUserCount(parsedData.count);
     }
   }
 
@@ -56,7 +63,7 @@ class App extends Component {
     return (<div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a> 
-          <ChatCounter />
+          <ChatCounter userCount={this.state.userCount}/>
         </nav>
           <MessageList messagelist= {this.state.messagelist}/>
         <Chatbar currentUser={this.state.currentUser} funcUpdateChatMessage={this.updateChatMessage} funcUpdateUsername={this.updateCurrentUserName}/>
