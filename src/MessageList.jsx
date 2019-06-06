@@ -11,7 +11,7 @@ class MessageList extends Component {
         if (element.type === "user_message") {
           // Regular user message - render a message object
           return <Message type={element.type} key={element.msgData.id} username= {element.msgData.username} 
-          content= {element.msgData.content}></Message>
+          content= {element.msgData.content} textColor={element.msgData.color}></Message>
         } else if (element.type === "system_notification_name_change") {
           // Special system notification - render a notification-type
           const sysMessage = `${element.msgData.oldName} changed their name to ${element.msgData.newName}`
