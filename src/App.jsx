@@ -39,7 +39,7 @@ class App extends Component {
       that contains a link to a valid image */
       const messages = this.state.messagelist.concat(parsedData);
       //TEST
-      if(parsedData.msgData.imgURLData.validImage) {
+      if(parsedData.msgData.imgURLData) {
         console.log("Line 42 got a message containing a link to an image!", parsedData.msgData.imgURLData);
       }
       this.setState({messagelist: messages});

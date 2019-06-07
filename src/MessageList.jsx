@@ -5,7 +5,9 @@ import Notification from './notification.jsx'
 // The list container for messages.
 class MessageList extends Component {
   render () {
-    // Iterate through the list of Messages and populate the MessageList window
+    /* Iterate through the list of Messages and populate the MessageList window. We have
+    to determine if the incoming message is one with an imgURL
+    */
     return (<div>
       {this.props.messagelist.map((element) => {
         if (element.type === "user_message") {
