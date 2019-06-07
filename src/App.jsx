@@ -35,7 +35,6 @@ class App extends Component {
     const parsedData = JSON.parse(messageData);
 
     if (parsedData.type === "user_message") {
-      console.log("Line 38 can we see color", parsedData);
       const messages = this.state.messagelist.concat(parsedData);
       this.setState({messagelist: messages});
     } else if (parsedData.type === "system_notification_name_change") {

@@ -8,14 +8,20 @@ class Chatbar extends Component {
   }
   
   makeMessageObject = (edata) => {
-    // Testing
-    
     const messageObj = {
       username: this.state.currentUser,
       content: edata.target.value.trim(),
-      imageurl: null
     }
+
+    /* This part tests to see if there is a link to an image resource
+    in the client's outgoing message. If so, add a new key-value pair
+    to the messageObj
+    */
     const imgURL = extractImageURL(messageObj.content);
+    if (imgURL.validImage) {
+      messageObj.imgURLData = imgURL;
+      console.log("Line 23, makeMessageObject: Sent a message object with a valid image URL", messageObj)
+    }
     
     return messageObj;
   }
