@@ -16,6 +16,7 @@ class App extends Component {
     const formattedData = this.createClientMessage("client_name_change_notification", data);
     this.socket.send(formattedData);
   }
+  
   updateChatMessage = (messageData) => {
     // Process the user input triggered by the child event and send the data to the server
     // Here is where we want to send the data to the server
