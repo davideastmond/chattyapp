@@ -7,8 +7,10 @@ class MessageWithImage extends Component {
     console.log("Message RENDERED line 7 PROPS", this.props.imageSrc);
     return <div className="message">
       <span className="message-username" style={{color: this.props.textColor }}>{this.props.username}</span>
-      <span className="message-content">{this.props.content}</span>
+      <span className="message-content">{this.props.content} <br></br>
       <img className="message-content-image" src={this.props.imgSrc}/>
+      
+      </span>
     </div>
   }
 }
