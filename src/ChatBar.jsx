@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import URLExtractor from './urlExtractor.js'
 import extractImageURL from './urlExtractor.js';
+
 class Chatbar extends Component {
   constructor (props) {
     super (props)
@@ -18,16 +19,15 @@ class Chatbar extends Component {
     to the messageObj
     */
     const imgURL = extractImageURL(messageObj.content);
+
     if (imgURL.validImage) {
       messageObj.imgURLData = imgURL;
-      console.log("Line 23, makeMessageObject: Sent a message object with a valid image URL", messageObj)
     }
-    
     return messageObj;
   }
 
   handleChatMessageChange = (e) => {
-    // Handles when user types presses enter. 
+    // Handles when user presses enter. 
     // Create a chat message object and sent it up to the parent through the props method
     if (e.key === 'Enter' && e.target.value.trim() !== "") {
       const obj = this.makeMessageObject(e);
@@ -35,9 +35,10 @@ class Chatbar extends Component {
       e.target.value = "";
     }
   }
+
   // EVENT HANDLER for when user changes their name
   updateSender = (e) => {
-    // Update the state currentUser state property when a user types a name into the username box
+    // Update the currentUser state when a user types a name into the username box and hits enter
     if (e.key ==='Enter') {
       // activate a function that propogates the username up to the app parent
       let changedUserName = e.target.value.trim();
@@ -48,10 +49,11 @@ class Chatbar extends Component {
       }
 
       if (changedUserName === "") {
-        // If username is a null string, make it annonymous
+        // If username is a null string, make the user's name "Annonymous"
         changedUserName = "Annonymous"
         e.target.value = changedUserName;
       }
+      
       const userNameChangeDataObj = {
         oldName: this.state.currentUser,
         newName: changedUserName

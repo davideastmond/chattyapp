@@ -11,12 +11,12 @@ class App extends Component {
                     userCount: 0}
   }
   updateCurrentUserName = (data) => {
-    // This function to be passed down in props to the username input text field
+    // This function is passed down in props to the username input text field
     // data should be an object with {oldName, newName}
     const formattedData = this.createClientMessage("client_name_change_notification", data);
     this.socket.send(formattedData);
   }
-  
+
   updateChatMessage = (messageData) => {
     // Process the user input triggered by the child event and send the data to the server
     // Here is where we want to send the data to the server
@@ -29,6 +29,7 @@ class App extends Component {
     the client an updated count of the users online */
     this.setState({userCount: countData });
   }
+
   getMessageFromServer = (messageData) => {
     /* Get the message data from the server, parse it and
      Determine the message type and determine how to display it 
@@ -39,20 +40,19 @@ class App extends Component {
       /* If it's a user message, we have to determine if it's a special message
       that contains a link to a valid image */
       const messages = this.state.messagelist.concat(parsedData);
-      //TEST
-      if(parsedData.msgData.imgURLData) {
-        console.log("Line 42 got a message containing a link to an image!", parsedData.msgData.imgURLData);
-      }
       this.setState({messagelist: messages});
+
     } else if (parsedData.type === "system_notification_name_change") {
       const messages = this.state.messagelist.concat(parsedData);
       this.setState({messagelist: messages});
+
     } else if (parsedData.type === "system_notification_user_count") {
       console.log("Received a user count system message", parsedData);
       this.updateUserCount(parsedData.count);
     }
   }
 
+  /* The web app connects immediately upon mounting */
   componentDidMount () {
     this.socket = new WebSocket('ws://0.0.0.0:3001/');
 
@@ -61,7 +61,7 @@ class App extends Component {
     }
     
     this.socket.onmessage = e => {
-      // Display the message on the client
+      // Call a function that handles messages sent to client from server
       this.getMessageFromServer(e.data)
     }
   }
@@ -79,7 +79,7 @@ class App extends Component {
   }
 
   createClientMessage(type, msgData) {
-    // Creates and serializes message data to send to the server 
+    // Helper function: creates and serializes message data to send to the server 
     const objToReturn = {
       type,
       msgData

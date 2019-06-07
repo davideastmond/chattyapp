@@ -1,6 +1,6 @@
 function extractImageURL(input) {
-  /**Helper function that extracts the URL from the line of text the user
-   * has typed (input). If there is no URL, then return null
+  /* Helper function that extracts the URL from the line of text the user
+   * has typed (input). If there is no URL, then return null. 
   */
   const returnObj = {
     validImage: false,
@@ -17,8 +17,8 @@ function extractImageURL(input) {
     indexOfURL = input.indexOf("http://")
   }
 
-  /* First make sure there is valid resource. If not, return the object
-  with the appropriate values that indicate there are no image URLs, with the text
+  /* First make sure there is URL that is structured to point to a valid resource. If not, return the object
+  with the appropriate values that indicate there are no image URLs, with the text the user typed.
   */
   if (indexOfURL < 0) {
     returnObj.cleanText = input;
@@ -26,11 +26,16 @@ function extractImageURL(input) {
   }
   
   /** At this point, we have a URL. The next part, we have to discern
-   * whether the resource is a valid image .png, .jpg or .gif
+   * whether the resource is an image (.png, .jpg or .gif).
+   * If the resource URL is formatted properly, we'll modify the return object and set it
+   * so that validImage is true, provide the URL and also provide the 
+   * message text that is void of the URL.
+   * 
+   * If the URL is not pointing to a proper image resource, the cleanInput will just be what the
+   * user typed; the URL will be displayed as the user typed it.
    */
   let res = input.substring(indexOfURL, input.length);
   let link = res.split(' ')[0];
-
   let extension = link.substring(link.length - 4, link.length);
 
   if (extension === ".png" || extension === ".jpg" || extension === ".gif") {
