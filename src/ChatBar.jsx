@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-
+import URLExtractor from './urlExtractor.js'
+import extractImageURL from './urlExtractor.js';
 class Chatbar extends Component {
   constructor (props) {
     super (props)
@@ -7,11 +8,15 @@ class Chatbar extends Component {
   }
   
   makeMessageObject = (edata) => {
+    // Testing
+    
     const messageObj = {
       username: this.state.currentUser,
       content: edata.target.value.trim(),
       imageurl: null
     }
+    const imgURL = extractImageURL(messageObj.content);
+    
     return messageObj;
   }
 
@@ -61,32 +66,4 @@ class Chatbar extends Component {
   }
 }
 
-function extractImageURL(textLine) {
-  /**Helper function that extracts the URL from the line of text the user
-   * has typed. If there is no URL, then return null
-  */
-
-  const returnObj = {
-    validURL: false,
-    cleanString: "",
-    imgsrc: ""
-  }
-  let indexOfURL;
-  /* First make sure there is valid resource. If not, return the object
-  with the appropriate values that indicate there are no image URLs, with the text
-  */
-  if (textLine.indexOf("https://") >= 0) {
-    indexOfURL = textLine.indexOf("https://")
-  } else if (textLine.indexOf("http://") >= 0) {
-    indexOfURL = textLine.indexOf("http://")
-  }
-
-  if (indexOfURL < 0) {
-    returnObj.cleanString = textLine.trim();
-    return returnObj;
-  }
-  /** At this point, we have a URL. The next part, we have to discern
-   * whether the resource is a valid image .png, .jpg or .gif
-   */
-}
 export default Chatbar;
