@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 // This holds an actual message, which contains the username and the message
-// body
+// body. It also supports one image included in the text
 class MessageWithImage extends Component {
   render () {
     console.log("Message RENDERED line 7 PROPS", this.props.imageSrc);
