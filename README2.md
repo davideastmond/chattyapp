@@ -6,7 +6,9 @@ A slack-like client made with React. Clients log on to the server and can send m
 - Users can send images with their messages! 
 
 ## Final Product
+[Two users logged on, can see their messages!](https://github.com/davideastmond/chattyapp/blob/master/img/chattyApp.png)
 
+[Even supports pictures!](https://github.com/davideastmond/chattyapp/blob/master/img/chattyAppImages.png)
 
 ## Dependencies
 - React
