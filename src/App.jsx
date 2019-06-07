@@ -31,11 +31,17 @@ class App extends Component {
   getMessageFromServer = (messageData) => {
     /* Get the message data from the server, parse it and
      Determine the message type and determine how to display it 
-     It can be a user message or a system notification */
+     It can be a user message or some kind of system notification */
     const parsedData = JSON.parse(messageData);
 
     if (parsedData.type === "user_message") {
+      /* If it's a user message, we have to determine if it's a special message
+      that contains a link to a valid image */
       const messages = this.state.messagelist.concat(parsedData);
+      //TEST
+      if(parsedData.msgData.imgURLData.validImage) {
+        console.log("Line 42 got a message containing a link to an image!", parsedData.msgData.imgURLData);
+      }
       this.setState({messagelist: messages});
     } else if (parsedData.type === "system_notification_name_change") {
       const messages = this.state.messagelist.concat(parsedData);
